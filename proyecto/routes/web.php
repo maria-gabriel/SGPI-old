@@ -37,13 +37,16 @@ Route::group(['namespace'=>'admin', 'middleware' => 'val_acceso'],function(){
     Route::post('crud/tarea', [TareaController::class,'crud'])->name('tareas.crud');
     Route::get('tareas/documentos/{tarea}', [TareaController::class,'documentos'])->name('tareas.documentos');
     Route::post('tareas/save/{tarea}', [TareaController::class,'store'])->name('tareas.store');
-
+    Route::get('tareas/create/responsable/{tarea}',[TareaController::class,'create2'])->name('tareas.responsable');
+    Route::post('tareas/save/responsable/{tarea}', [TareaController::class,'store2'])->name('tareas.store2');
 
     Route::get('subtareas',[SubtareaController::class,'index'])->name('subtareas.index');
     Route::get('subtareas/create/{tarea}',[SubtareaController::class,'create'])->name('subtareas.create');
     Route::post('crud/subtarea', [SubtareaController::class,'crud'])->name('subtareas.crud');
     Route::get('subtareas/documentos/{subtarea}', [SubtareaController::class,'documentos'])->name('subtareas.documentos');
     Route::post('subtareas/save/{subtarea}', [SubtareaController::class,'store'])->name('subtareas.store');
+    Route::get('subtareas/create/responsable/{subtarea}',[SubtareaController::class,'create2'])->name('subtareas.responsable');
+    Route::post('subtareas/save/responsable/{subtarea}', [SubtareaController::class,'store2'])->name('subtareas.store2');
 
     Route::get('proyectos',[ProyectoController::class,'index'])->name('proyectos.index');
     Route::post('crud/proyecto', [ProyectoController::class,'crud'])->name('proyectos.crud');

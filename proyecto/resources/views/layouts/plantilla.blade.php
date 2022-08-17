@@ -351,7 +351,7 @@
                   <h5>Sistema de gestión de proyectos internos</h5>
                   <nav aria-label="breadcrumb">
                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item today-header">{{ $today }}</li>
+                        <li class="breadcrumb-item today-header text-muted">{{ $today }}</li>
                         {{--  <li class="breadcrumb-item active" aria-current="page"></li>  --}}
                      </ol>
                   </nav>

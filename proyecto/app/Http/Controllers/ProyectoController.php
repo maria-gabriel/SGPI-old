@@ -29,6 +29,9 @@ class ProyectoController extends Controller
             if ($request->has('index')) {
                 if ($request->index == "load") {
                     $proyecto = Proyecto::where('id_user', Auth::user()->id)->get(['id AS DT_RowId', 'proyectos.*']);
+                    foreach ($proyecto as $pro) {
+                        $pro->id_user = $pro->usuarios->nombreCompleto;
+                    }
                     $respuesta['data'] = $proyecto;
                     return response()->json($respuesta);
                 } elseif ($request->index == "save") {
@@ -47,8 +50,7 @@ class ProyectoController extends Controller
                     $proyecto->inicio = $request->inicio;
                     $proyecto->final = $request->final;
                     $proyecto->id_user = Auth::user()->id;
-                    $usuario = User::where('id', Auth::user()->id)->get()->last();
-                    $proyecto->area = $usuario->area;
+                    $proyecto->area = Auth::user()->area;
                     $proyecto->estado = "En curso";
                     $proyecto->save();
                     $nuevo = Proyecto::orderBy('created_at', 'desc')->first();
