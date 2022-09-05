@@ -48,7 +48,7 @@ Route::group(['namespace'=>'admin', 'middleware' => 'val_acceso'],function(){
     Route::get('subtareas/create/responsable/{subtarea}',[SubtareaController::class,'create2'])->name('subtareas.responsable');
     Route::post('subtareas/save/responsable/{subtarea}', [SubtareaController::class,'store2'])->name('subtareas.store2');
 
-    Route::get('proyectos',[ProyectoController::class,'index'])->name('proyectos.index');
+    Route::get('proyectos/{direccion}',[ProyectoController::class,'index'])->name('proyectos.index');
     Route::post('crud/proyecto', [ProyectoController::class,'crud'])->name('proyectos.crud');
     Route::get('proyectos/grafica/{proyecto}', [ProyectoController::class,'graphic'])->name('proyectos.grafica');
     Route::get('proyectos/documentos/{proyecto}', [ProyectoController::class,'documentos'])->name('proyectos.documentos');

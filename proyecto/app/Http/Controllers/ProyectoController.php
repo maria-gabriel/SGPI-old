@@ -12,6 +12,8 @@ use App\Models\Tarea;
 use App\Models\Subtarea;
 use App\Models\cat_docs;
 use App\Models\Documento;
+use App\Models\Subdireccion;
+use App\Models\Departamento;
 
 class ProyectoController extends Controller
 {
@@ -89,6 +91,40 @@ class ProyectoController extends Controller
         }
     }
 
+    public function index(int $direccion){
+        $bg = $this->bg;
+        $sub_array = [];
+        $dep_array = [];
+        $sub = Subdireccion::where("id_dir", $direccion)->get();
+        foreach ($sub as $key => $s) {
+            $sub_array[$key] = $s->id;
+        }
+        $dep = Departamento::WhereIn('id_sub', $sub_array)->get();
+        foreach ($dep as $key => $d) {
+            $dep_array[$key] = $d->id;
+        }
+        $area_array = array_merge($sub_array, $dep_array);
+        $proyectos = Proyecto::WhereIn('area', $area_array)->orderBy('created_at', 'ASC')->get();
+        foreach($proyectos as $proyecto){
+            if($proyecto->area >= 200){
+                $proyecto->area = $proyecto->departamentos->nombre;
+            }else{
+                $proyecto->area = $proyecto->subdirecciones->nombre;
+            }
+        }
+        if($direccion == 1){
+            $direccion = "Dirección general";
+        }elseif ($direccion == 2){
+            $direccion = "Dirección de Atención Médica";
+        }elseif ($direccion == 3){
+            $direccion ="Dirección de Planeación y Evaluación";
+        }elseif ($direccion == 4){
+            $direccion = "Dirección de Administración";
+        }elseif ($direccion == 5){
+            $direccion = "Comisión para la Protección Contra Riesgos Sanitarios del Estado de Morelos";
+        }
+        return view('proyectos.index',compact('bg','proyectos','direccion'));
+    }
     public function graphic(Proyecto $proyecto){
         $bg = $this->bg;
         $tareas_id = [];

@@ -1,409 +1,515 @@
-   <!DOCTYPE html>
-   <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-      <meta name="csrf-token" content="{{ csrf_token() }}">
-      <title>{{ config('app.name', 'Laravel') }}</title>
-      <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Fonts -->
-      <link rel="dns-prefetch" href="//fonts.gstatic.com">
-      <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-      <script src="{{ url('/css/fonts/kit.fontawesome-42d5adcbca.js') }}" crossorigin="anonymous"></script>
+   <meta name="csrf-token" content="{{ csrf_token() }}">
+   <title>{{ config('app.name', 'Laravel') }}</title>
+   <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+      crossorigin="anonymous"></script>
 
-      <script src="{{ URL::asset('editor/sandbox/js/jquery.dataTables.js') }}"></script>
-      <link href="{{ URL::asset('editor/sandbox/css/editor.dataTables.css') }}" rel="stylesheet" type="text/css" />
+   <!-- Fonts -->
+   <link rel="dns-prefetch" href="//fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+   <script src="{{ url('/css/fonts/kit.fontawesome-42d5adcbca.js') }}" crossorigin="anonymous"></script>
 
-      <!-- Style -->
-      <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/jquery/jquery.dataTables.min.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/css/select.dataTables.min.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/buttons/buttons.dataTables.min.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/css/dataTables.dateTime.min.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/css/editor.dataTables.min.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/vendors/select2/css/select2.min.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/vendors/bundle.css') }}" />
+   <script src="{{ URL::asset('editor/sandbox/js/jquery.dataTables.js') }}"></script>
+   <link href="{{ URL::asset('editor/sandbox/css/editor.dataTables.css') }}" rel="stylesheet" type="text/css" />
 
-      <!-- Css -->
-      <style>
-        :root {
-        --bs-primary: <?php echo $bg->custom; ?>;
-        --bs-primary-fade: <?php echo $bg->customfade; ?>;
-        }
-        </style>
-      <link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}" />
-      <link rel="stylesheet" type="text/css" href="{{ url('/css/plantilla.css') }}" />
+   <!-- Style -->
+   <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/jquery/jquery.dataTables.min.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/css/select.dataTables.min.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/buttons/buttons.dataTables.min.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/css/dataTables.dateTime.min.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ URL::asset('editor/css/editor.dataTables.min.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/vendors/select2/css/select2.min.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ URL::asset('js/vendors/bundle.css') }}" />
 
-      <!-- Icon -->
-      <link rel="icon" class="rounded-circle" href="{{URL::asset('/image/logos/ssm_logo_32.png')}}">
-      
-      <body>
-         <!-- begin::preloader-->
-         <div class="preloader">
-            <div class="preloader-icon"></div>
-         </div>
-         <!-- end::preloader --><!-- begin::header -->
-         <div class="header">
-            <div>
-               <ul class="navbar-nav">
-                  <!-- begin::navigation-toggler -->
-                  <li class="nav-item navigation-toggler"><a href="#" class="nav-link" title="Hide navigation"><i data-feather="arrow-left"></i></a></li>
-                  {{--  <li class="nav-item navigation-toggler"><a href="#" class="nav-link" title="Hide title"><i data-feather="arrow-down"></i></a></li>  --}}
-                  <li class="nav-item navigation-toggler mobile-toggler"><a href="#" class="nav-link" title="Show navigation"><i data-feather="menu"></i></a></li>
-                  <!-- end::navigation-toggler -->
-                  <li class="nav-item">
-                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dirección</a>
-                     <div class="dropdown-menu"><a href="#" class="dropdown-item">User</a><a href="#" class="dropdown-item">Category</a><a href="#" class="dropdown-item">Product</a><a href="#" class="dropdown-item">Report</a></div>
-                  </li>
-                  <li class="nav-item dropdown">
-                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Aplicativos</a>
-                     <div class="dropdown-menu dropdown-menu-big">
-                        <div class="p-3">
-                           <div class="row row-xs">
-                              <div class="col-6">
-                                 <a href="chat.html">
-                                    <div class="p-3 border-radius-1 border text-center mb-3">
-                                       <i class="width-23 height-23" data-feather="clipboard"></i>
-                                       <div class="mt-2">SOS</div>
-                                    </div>
-                                 </a>
+   <!-- Css -->
+   <style>
+      :root {
+         --bs-primary: <?php echo $bg->custom;
+         ?>;
+         --bs-primary-fade: <?php echo $bg->customfade;
+         ?>;
+      }
+   </style>
+   <link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}" />
+   <link rel="stylesheet" type="text/css" href="{{ url('/css/plantilla.css') }}" />
+
+   <!-- Icon -->
+   <link rel="icon" class="rounded-circle" href="{{URL::asset('/image/logos/ssm_logo_32.png')}}">
+
+<body>
+   <!-- begin::preloader-->
+   <div class="preloader">
+      <div class="preloader-icon"></div>
+   </div>
+   <!-- end::preloader -->
+   <!-- begin::header -->
+   <div class="header">
+      <div>
+         <ul class="navbar-nav">
+            <!-- begin::navigation-toggler -->
+            <li class="nav-item navigation-toggler"><a href="#" class="nav-link" title="Hide navigation"><i
+                     data-feather="arrow-left"></i></a></li>
+            {{-- <li class="nav-item navigation-toggler"><a href="#" class="nav-link" title="Hide title"><i
+                     data-feather="arrow-down"></i></a></li> --}}
+            <li class="nav-item navigation-toggler mobile-toggler"><a href="#" class="nav-link"
+                  title="Show navigation"><i data-feather="menu"></i></a></li>
+            <!-- end::navigation-toggler -->
+            <li class="nav-item">
+               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Proyectos Direcciones</a>
+               <div class="dropdown-menu">
+                  <a href="{{ route('proyectos.index', 1)}}" class="dropdown-item">Dirección general</a>
+                  <a href="{{ route('proyectos.index', 2)}}" class="dropdown-item">Dirección de Atención Médica</a>
+                  <a href="{{ route('proyectos.index', 3)}}" class="dropdown-item">Dirección de Planeación y Evaluación </a>
+                  <a href="{{ route('proyectos.index', 4)}}" class="dropdown-item">Dirección de Administración</a>
+                  <a href="{{ route('proyectos.index', 5)}}" class="dropdown-item">Comisión para la Protección Contra Riesgos Sanitarios del Estado de Morelos</a>
+               </div>
+            </li>
+            <li class="nav-item dropdown">
+               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Aplicativos</a>
+               <div class="dropdown-menu dropdown-menu-big">
+                  <div class="p-3">
+                     <div class="row row-xs">
+                        <div class="col-6">
+                           <a href="chat.html">
+                              <div class="p-3 border-radius-1 border text-center mb-3">
+                                 <i class="width-23 height-23" data-feather="clipboard"></i>
+                                 <div class="mt-2">SOS</div>
                               </div>
-                              <div class="col-6">
-                                 <a href="inbox.html">
-                                    <div class="p-3 border-radius-1 border text-center mb-3">
-                                       <i class="width-23 height-23" data-feather="video"></i>
-                                       <div class="mt-2">Conferencias</div>
-                                    </div>
-                                 </a>
+                           </a>
+                        </div>
+                        <div class="col-6">
+                           <a href="inbox.html">
+                              <div class="p-3 border-radius-1 border text-center mb-3">
+                                 <i class="width-23 height-23" data-feather="video"></i>
+                                 <div class="mt-2">Conferencias</div>
                               </div>
-                           </div>
+                           </a>
                         </div>
                      </div>
-                  </li>
-               </ul>
-            </div>
-            <div>
-               <ul class="navbar-nav">
-                  <!-- begin::header search -->
-                  <li class="nav-item icon-header">
-                     <a href="#" class="nav-link" title="Información"><i data-feather="alert-circle"></i></a>
-                  </li>
-                  <!-- end::header search --><!-- begin::header minimize/maximize -->
-                  <li class="nav-item dropdown icon-header"><a href="#" class="nav-link" title="Pantalla completa" data-toggle="fullscreen"><i class="maximize" data-feather="maximize"></i><i class="minimize" data-feather="minimize"></i></a></li>
-                  <!-- end::header minimize/maximize --><!-- begin::header messages dropdown -->
-                  <li class="nav-item dropdown icon-header">
-                     <a href="#" onclick="taskmenubtn();" class="nav-link nav-link-nota {{$notas_pen->isEmpty() ? '' : 'nav-link-notify'}}" title="Notas" data-toggle="dropdown"><i data-feather="book"></i></a>
-                     <div id="taskmenu" class="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                        <div class="p-4 text-center d-flex justify-content-between"                         data-backround-image="{{URL::asset('/image/avatar/image1.jpg')}}">
-                           <h6 class="mb-0">Notas</h6>
-                           <small class="font-size-11 opacity-7"></small>
-                        </div>
-                        <div>
-                           <div class="input-group px-2 pt-2 pb-0">
-                              <input id="new-task" type="text" class="form-control bg-gray" maxlength="50" placeholder="Crear nueva nota" required>
-                              <div class="input-group-append"><button class="btn btn-{{$bg->customcolor}}" type="button" id="add-task"><i class="fa fa-plus"></i></button></div>
-                           </div>
-                           <span class="text-muted small px-3">Máximo 50 carateres</span>
+                  </div>
+               </div>
+            </li>
+         </ul>
+      </div>
+      <div>
+         <ul class="navbar-nav">
+            <!-- begin::header search -->
+            <li class="nav-item icon-header">
+               <a href="#" class="nav-link" title="Información"><i data-feather="alert-circle"></i></a>
+            </li>
+            <!-- end::header search -->
+            <!-- begin::header minimize/maximize -->
+            <li class="nav-item dropdown icon-header"><a href="#" class="nav-link" title="Pantalla completa"
+                  data-toggle="fullscreen"><i class="maximize" data-feather="maximize"></i><i class="minimize"
+                     data-feather="minimize"></i></a></li>
+            <!-- end::header minimize/maximize -->
+            <!-- begin::header messages dropdown -->
+            <li class="nav-item dropdown icon-header">
+               <a href="#" onclick="taskmenubtn();"
+                  class="nav-link nav-link-nota {{$notas_pen->isEmpty() ? '' : 'nav-link-notify'}}" title="Notas"
+                  data-toggle="dropdown"><i data-feather="book"></i></a>
+               <div id="taskmenu" class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                  <div class="p-4 text-center d-flex justify-content-between"
+                     data-backround-image="{{URL::asset('/image/avatar/image1.jpg')}}">
+                     <h6 class="mb-0">Notas</h6>
+                     <small class="font-size-11 opacity-7"></small>
+                  </div>
+                  <div>
+                     <div class="input-group px-2 pt-2 pb-0">
+                        <input id="new-task" type="text" class="form-control bg-gray" maxlength="50"
+                           placeholder="Crear nueva nota" required>
+                        <div class="input-group-append"><button class="btn btn-{{$bg->customcolor}}" type="button"
+                              id="add-task"><i class="fa fa-plus"></i></button></div>
+                     </div>
+                     <span class="text-muted small px-3">Máximo 50 carateres</span>
 
-                           <ul class="list-group list-group-flush">
-                              <div class="task">
-                              <span class="text-divider small pb-2 pl-3 pt-3"><span>Notas pendientes</span></span>
-                              <ul id="incomplete-tasks">
-                               @foreach($notas_pen as $nota)
-                               <li id="{{$nota->id}}"><input type="checkbox"><label>{{$nota->nombre}}</label><input type="text" class="form-control bg-gray" value=""><button class="check-edit btn btn-link text-{{$bg->customcolor}} btn-sm m-1"><i class="fa fa-pencil"></i></button><button class="check-delete btn btn-link text-danger btn-sm m-1"><i class="fa fa-times"></i></button></li>
-                               @endforeach
-                               {{--  <li><input type="checkbox"><label>Go Shopping</label><input type="text" class="form-control bg-gray" value=""><button class="check-edit btn btn-link text-{{$bg->customcolor}} btn-sm m-1"><i class="fa fa-pencil"></i></button><button class="check-delete btn btn-link text-danger btn-sm m-1"><i class="fa fa-times"></i></button></li>  --}}
-                            </ul>
-                            <li id="non-pen" class="text-muted small px-4 {{$notas_pen->isEmpty() ? 'd-block' : 'd-none'}}">No hay notas</li>
+                     <ul class="list-group list-group-flush">
+                        <div class="task">
+                           <span class="text-divider small pb-2 pl-3 pt-3"><span>Notas pendientes</span></span>
+                           <ul id="incomplete-tasks">
+                              @foreach($notas_pen as $nota)
+                              <li id="{{$nota->id}}"><input type="checkbox"><label>{{$nota->nombre}}</label><input
+                                    type="text" class="form-control bg-gray" value=""><button
+                                    class="check-edit btn btn-link text-{{$bg->customcolor}} btn-sm m-1"><i
+                                       class="fa fa-pencil"></i></button><button
+                                    class="check-delete btn btn-link text-danger btn-sm m-1"><i
+                                       class="fa fa-times"></i></button></li>
+                              @endforeach
+                              {{-- <li><input type="checkbox"><label>Go Shopping</label><input type="text"
+                                    class="form-control bg-gray" value=""><button
+                                    class="check-edit btn btn-link text-{{$bg->customcolor}} btn-sm m-1"><i
+                                       class="fa fa-pencil"></i></button><button
+                                    class="check-delete btn btn-link text-danger btn-sm m-1"><i
+                                       class="fa fa-times"></i></button></li> --}}
+                           </ul>
+                           <li id="non-pen"
+                              class="text-muted small px-4 {{$notas_pen->isEmpty() ? 'd-block' : 'd-none'}}">No hay
+                              notas</li>
 
-                            <span class="text-divider small pb-2 pl-3 pt-3"><span>Notas finalizadas</span></span>
-                            <ul id="completed-tasks">
+                           <span class="text-divider small pb-2 pl-3 pt-3"><span>Notas finalizadas</span></span>
+                           <ul id="completed-tasks">
                               @foreach($notas_fin as $nota)
-                              <li id="{{$nota->id}}"><input type="checkbox" checked><label>{{$nota->nombre}}</label><input type="text" class="form-control bg-gray" value="Go Shopping"><button class="check-edit btn btn-link text-{{$bg->customcolor}} btn-sm m-1 disabled" disabled><i class="fa fa-pencil"></i></button><button class="check-delete btn btn-link text-danger btn-sm m-1"><i class="fa fa-times"></i></button></li>
+                              <li id="{{$nota->id}}"><input type="checkbox"
+                                    checked><label>{{$nota->nombre}}</label><input type="text"
+                                    class="form-control bg-gray" value="Go Shopping"><button
+                                    class="check-edit btn btn-link text-{{$bg->customcolor}} btn-sm m-1 disabled"
+                                    disabled><i class="fa fa-pencil"></i></button><button
+                                    class="check-delete btn btn-link text-danger btn-sm m-1"><i
+                                       class="fa fa-times"></i></button></li>
                               @endforeach
                            </ul>
-                           <li id="non-fin" class="text-muted small px-4 {{$notas_fin->isEmpty() ? 'd-block' : 'd-none'}}">No hay notas</li>
-                        </div>
-                        </ul>
-                     </div>
-                     <div class="p-2 text-right">
-                        <ul class="list-inline small">
-                           <li class="list-inline-item"><a href="#" onclick="finalizeTasks();">Finalizar todas</a></li>
-                           <li class="list-inline-item"><a href="#" onclick="removeTasks();">Eliminar finalizadas</a></li>
-                        </ul>
-                     </div>
-                  </div>
-               </li>
-               <!-- end::header messages dropdown --><!-- begin::header notification dropdown -->
-               <li class="nav-item dropdown icon-header">
-                  <a href="#" class="nav-link nav-link-notify" title="Notifications" data-toggle="dropdown"><i data-feather="bell"></i></a>
-                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                     <div class="p-4 text-center d-flex justify-content-between"                         data-backround-image="{{URL::asset('/image/avatar/image1.jpg')}}">
-                        <h6 class="mb-0">Notifications</h6>
-                        <small class="font-size-11 opacity-7">1 unread notifications</small>
-                     </div>
-                     <div>
-                        <ul class="list-group list-group-flush">
-                           <li>
-                              <a href="#" class="list-group-item d-flex hide-show-toggler">
-                                 <div>
-                                    <figure class="avatar avatar-sm m-r-15"><span class="avatar-title bg-success-bright text-success rounded-circle"><i class="ti-user"></i></span></figure>
-                                 </div>
-                                 <div class="flex-grow-1">
-                                    <p class="mb-0 line-height-20 d-flex justify-content-between">New customer registered                                            <i title="Mark as read" data-toggle="tooltip"                                               class="hide-show-toggler-item fa fa-circle-o font-size-11"></i></p>
-                                    <span class="text-muted small">20 min ago</span>
-                                 </div>
-                              </a>
-                           </li>
-                           <li class="text-divider small pb-2 pl-3 pt-3"><span>Old notifications</span></li>
-                           <li>
-                              <a href="#" class="list-group-item d-flex hide-show-toggler">
-                                 <div>
-                                    <figure class="avatar avatar-sm m-r-15"><span class="avatar-title bg-warning-bright text-warning rounded-circle"><i class="ti-package"></i></span></figure>
-                                 </div>
-                                 <div class="flex-grow-1">
-                                    <p class="mb-0 line-height-20 d-flex justify-content-between">New Order Recieved                                            <i title="Mark as unread" data-toggle="tooltip"                                               class="hide-show-toggler-item fa fa-check font-size-11"></i></p>
-                                    <span class="text-muted small">45 sec ago</span>
-                                 </div>
-                              </a>
-                           </li>
-                           <li>
-                              <a href="#"                                   class="list-group-item d-flex align-items-center hide-show-toggler">
-                                 <div>
-                                    <figure class="avatar avatar-sm m-r-15"><span class="avatar-title bg-danger-bright text-danger rounded-circle"><i class="ti-server"></i></span></figure>
-                                 </div>
-                                 <div class="flex-grow-1">
-                                    <p class="mb-0 line-height-20 d-flex justify-content-between">Server Limit Reached!                                            <i title="Mark as unread" data-toggle="tooltip"                                               class="hide-show-toggler-item fa fa-check font-size-11"></i></p>
-                                    <span class="text-muted small">55 sec ago</span>
-                                 </div>
-                              </a>
-                           </li>
-                           <li>
-                              <a href="#"                                   class="list-group-item d-flex align-items-center hide-show-toggler">
-                                 <div>
-                                    <figure class="avatar avatar-sm m-r-15"><span class="avatar-title bg-info-bright text-info rounded-circle"><i class="ti-layers"></i></span></figure>
-                                 </div>
-                                 <div class="flex-grow-1">
-                                    <p class="mb-0 line-height-20 d-flex justify-content-between">Apps are ready for update                                            <i title="Mark as unread" data-toggle="tooltip"                                               class="hide-show-toggler-item fa fa-check font-size-11"></i></p>
-                                    <span class="text-muted small">Yesterday</span>
-                                 </div>
-                              </a>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="p-2 text-right">
-                        <ul class="list-inline small">
-                           <li class="list-inline-item"><a href="#">Mark All Read</a></li>
-                        </ul>
-                     </div>
-                  </div>
-               </li>
-               <!-- end::header notification dropdown --><!-- begin::user menu -->
-               <li class="nav-item dropdown">
-                  <a href="#" class="nav-link" title="Configuración" data-toggle="dropdown"><i data-feather="settings"></i></a>
-                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                     <div class="p-4 text-center d-flex justify-content-between"                         data-backround-image="{{URL::asset('/image/avatar/image1.jpg')}}">
-                        <h6 class="mb-0">Configuración</h6>
-                     </div>
-                     <div>
-                        <ul class="list-group list-group-flush">
-                           <li class="list-group-item">
-                              <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input" id="customSwitch1" checked><label class="custom-control-label config-title" for="customSwitch1">Mostrar título de cabecera.</label></div>
-                           </li>
-                           <li class="list-group-item">
-                              <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input" id="customSwitch2" checked><label class="custom-control-label config-date" for="customSwitch2">Mostrar fecha en cabecera</label></div>
-                           </li>
-                           <li class="list-group-item">
-                              <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input" id="customSwitch3" checked><label class="custom-control-label config-icons" for="customSwitch3">Mostrar iconos de cabecera</label></div>
-                           </li>
-                           <li class="list-group-item">
-                              <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input" id="customSwitch4"><label class="custom-control-label config-text" for="customSwitch4">Mostrar letra más grande</label></div>
-                           </li>
-                           <li class="list-group-item">
-                              <span class="text-muted small">Los cambios se borrarán al cerrar sesión</span>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </li>
-               <!-- end::user menu -->
-            </ul>
-            <!-- begin::mobile header toggler -->
-            <ul class="navbar-nav d-flex align-items-center">
-               <li class="nav-item header-toggler"><a href="#" class="nav-link"><i data-feather="arrow-down"></i></a></li>
-            </ul>
-            <!-- end::mobile header toggler -->
-         </div>
-      </div>
-      <!-- end::header -->
-      <div id="main">
-         <!-- begin::navigation -->
-         <div class="navigation">
-            <div class="navigation-menu-tab bg-{{$bg->customcolor}}">
-               <div>
-                  <div class="navigation-menu-tab-header" data-toggle="tooltip" title="{{Auth::user()->username}}" data-placement="right">
-                     {{--  <figure class="avatar avatar-sm"><img src="{{URL::asset('/image/logos/ssm_logo_60.png')}}" class="rounded-circle" alt="avatar"></figure>  --}}
-                     <figure class="avatar avatar-sm">
-                        <span class="avatar-title bg-white text-{{$bg->customcolor}} rounded-circle">{{substr(Auth::user()->username,0,1)}}</span>
-                      </figure>
-                    </div>
-               </div>
-               <div class="flex-grow-1">
-                  <ul>
-                     <li><a class="active" href="#" data-toggle="tooltip" data-placement="right" title="Proyectos"                           data-nav-target="#dashboards"><i data-feather="home"></i></a></li>
-                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Apps" data-nav-target="#apps"><i data-feather="command"></i></a></li>
-                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="UI Elements"                           data-nav-target="#elements"><i data-feather="layers"></i></a></li>
-                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Aplicativos" data-nav-target="#páginas"><i data-feather="copy"></i></a></li>
-                  </ul>
-               </div>
-               <div>
-                  <ul>
-                     <li><a href="{{ url('usuarios/perfil') }}" data-toggle="tooltip" data-placement="right" title="Mi perfil"><i data-feather="user"></i></a></li>
-                     <li><a href="{{ route('logout') }}" data-toggle="tooltip" data-placement="right" title="Cerrar sesión" onclick="event.preventDefault(); localStorage.clear(); document.getElementById('logout-form').submit();"><i data-feather="log-out"></i></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                          @csrf
-                       </form></li>
-                    </ul>
-                 </div>
-              </div>
-              <!-- begin::navigation menu -->
-              <div class="navigation-menu-body">
-               <!-- begin::navigation-logo -->
-               <div>
-                  <div id="navigation-logo"><a href="https://www.ssm.gob.mx" target="_blank">
-                    <img class="logo" src="{{URL::asset('/image/logos/ssm_logo.png')}}" alt="logo" width="170">
-                    <img class="logo-light" src="{{URL::asset('/image/logos/ssm_logo_white.png')}}" alt="logo-w" width="170"></a>
-                </div>
-               </div>
-               <!-- end::navigation-logo -->
-               <div class="navigation-menu-group">
-                  <div class="open" id="dashboards">
-                     <ul>
-                        <li class="navigation-divider mt-2"><h5 class="text-{{$bg->customcolor}}">SGPI</h5></li>
-                        <!-- <li><a href="dashboard-two.html">Ecommerce <span class="badge badge-danger">2</span></a></li> -->
-                        <li><a class="{{ (request()->is('home')) ? 'active' : '' }}" href="{{route('home')}}">Mis proyectos</a></li>
-                        <li><a class="{{ (request()->is('tareas')) ? 'active' : '' }}" href="{{route('tareas.index')}}">Tareas</a></li>
-                        <li><a class="{{ (request()->is('subtareas')) ? 'active' : '' }}" href="{{route('subtareas.index')}}">Subtareas</a></li>
-                        <li><a class="{{ (request()->is('archivos')) ? 'active' : '' }}" href="{{route('archivos.index')}}">Documentos</a></li>
-                        <div id="pages">
-                           <ul class="mt-3">
-                              @env('usuarios.index')
-                              <li class="navigation-divider mb-0">Desarrollo</li>
-                              <li>
-                                 <a class="{{ (request()->is('usuarios')) ? 'active' : '' }} {{ (request()->is('admins')) ? 'active' : '' }}" href="#">Usuarios</a>
-                                 <ul>
-                                    <li><a class="{{ (request()->is('usuarios')) ? 'text-bold' : '' }}" href="{{ route('usuarios.index') }}">Usuarios</a></li>
-                                    <li><a class="{{ (request()->is('admins')) ? 'text-bold' : '' }}" href="{{ route('admins.index') }}">Administradores</a></li>
-                                 </ul>
-                              </li>
-                              @endenv
-                              @env('direcciones.index')
-                              <li>
-                                 <a class="{{ (request()->is('direcciones')) ? 'active' : '' }} {{ (request()->is('subdirecciones')) ? 'active' : '' }} {{ (request()->is('departamentos')) ? 'active' : '' }}" href="#">Sectores</a>
-                                 <ul>
-                                    <li><a class="{{ (request()->is('direcciones')) ? 'text-bold' : '' }}" href="{{ route('direcciones.index') }}">Direcciones</a></li>
-                                    <li><a class="{{ (request()->is('subdirecciones')) ? 'text-bold' : '' }}" href="{{ route('subdirecciones.index') }}">Subdirecciones</a></li>
-                                    <li><a class="{{ (request()->is('departamentos')) ? 'text-bold' : '' }}" href="{{ route('departamentos.index') }}">Departamentos</a></li>
-                                 </ul>
-                              </li>
-                              @endenv
-                              <li>
-                                 <a class="{{ (request()->is('documentos')) ? 'active' : '' }} {{ (request()->is('accesos')) ? 'active' : '' }}" href="#">Catálogos</a>
-                                 <ul>
-                                    <li><a class="{{ (request()->is('accesos')) ? 'text-bold' : '' }}" href="{{ route('accesos.index') }}">Permisos</a></li>
-                                    <li><a class="{{ (request()->is('documentos')) ? 'text-bold' : '' }}" href="{{ route('documentos.index') }}">Documentos</a></li>
-                                 </ul>
-                              </li>
-                              <li>
-                                 <a href="#">Menu Level</a>
-                                 <ul>
-                                    <li>
-                                       <a href="#">Menu Level</a>
-                                       <ul>
-                                          <li><a href="#">Menu Level</a></li>
-                                       </ul>
-                                    </li>
-                                 </ul>
-                              </li>
-                           </ul>
+                           <li id="non-fin"
+                              class="text-muted small px-4 {{$notas_fin->isEmpty() ? 'd-block' : 'd-none'}}">No hay
+                              notas</li>
                         </div>
                      </ul>
                   </div>
-                  <div id="apps">
-                     
-                  </div>
-                  <div id="elements">
-                     
-                  </div>
-                  <div id="pages">
-                     
+                  <div class="p-2 text-right">
+                     <ul class="list-inline small">
+                        <li class="list-inline-item"><a href="#" onclick="finalizeTasks();">Finalizar todas</a></li>
+                        <li class="list-inline-item"><a href="#" onclick="removeTasks();">Eliminar finalizadas</a></li>
+                     </ul>
                   </div>
                </div>
+            </li>
+            <!-- end::header messages dropdown -->
+            <!-- begin::header notification dropdown -->
+            <li class="nav-item dropdown icon-header">
+               <a href="#" class="nav-link nav-link-notify" title="Notifications" data-toggle="dropdown"><i
+                     data-feather="bell"></i></a>
+               <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                  <div class="p-4 text-center d-flex justify-content-between"
+                     data-backround-image="{{URL::asset('/image/avatar/image1.jpg')}}">
+                     <h6 class="mb-0">Notifications</h6>
+                     <small class="font-size-11 opacity-7">1 unread notifications</small>
+                  </div>
+                  <div>
+                     <ul class="list-group list-group-flush">
+                        <li>
+                           <a href="#" class="list-group-item d-flex hide-show-toggler">
+                              <div>
+                                 <figure class="avatar avatar-sm m-r-15"><span
+                                       class="avatar-title bg-success-bright text-success rounded-circle"><i
+                                          class="ti-user"></i></span></figure>
+                              </div>
+                              <div class="flex-grow-1">
+                                 <p class="mb-0 line-height-20 d-flex justify-content-between">New customer registered
+                                    <i title="Mark as read" data-toggle="tooltip"
+                                       class="hide-show-toggler-item fa fa-circle-o font-size-11"></i></p>
+                                 <span class="text-muted small">20 min ago</span>
+                              </div>
+                           </a>
+                        </li>
+                        <li class="text-divider small pb-2 pl-3 pt-3"><span>Old notifications</span></li>
+                        <li>
+                           <a href="#" class="list-group-item d-flex hide-show-toggler">
+                              <div>
+                                 <figure class="avatar avatar-sm m-r-15"><span
+                                       class="avatar-title bg-warning-bright text-warning rounded-circle"><i
+                                          class="ti-package"></i></span></figure>
+                              </div>
+                              <div class="flex-grow-1">
+                                 <p class="mb-0 line-height-20 d-flex justify-content-between">New Order Recieved <i
+                                       title="Mark as unread" data-toggle="tooltip"
+                                       class="hide-show-toggler-item fa fa-check font-size-11"></i></p>
+                                 <span class="text-muted small">45 sec ago</span>
+                              </div>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="list-group-item d-flex align-items-center hide-show-toggler">
+                              <div>
+                                 <figure class="avatar avatar-sm m-r-15"><span
+                                       class="avatar-title bg-danger-bright text-danger rounded-circle"><i
+                                          class="ti-server"></i></span></figure>
+                              </div>
+                              <div class="flex-grow-1">
+                                 <p class="mb-0 line-height-20 d-flex justify-content-between">Server Limit Reached! <i
+                                       title="Mark as unread" data-toggle="tooltip"
+                                       class="hide-show-toggler-item fa fa-check font-size-11"></i></p>
+                                 <span class="text-muted small">55 sec ago</span>
+                              </div>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="list-group-item d-flex align-items-center hide-show-toggler">
+                              <div>
+                                 <figure class="avatar avatar-sm m-r-15"><span
+                                       class="avatar-title bg-info-bright text-info rounded-circle"><i
+                                          class="ti-layers"></i></span></figure>
+                              </div>
+                              <div class="flex-grow-1">
+                                 <p class="mb-0 line-height-20 d-flex justify-content-between">Apps are ready for update
+                                    <i title="Mark as unread" data-toggle="tooltip"
+                                       class="hide-show-toggler-item fa fa-check font-size-11"></i></p>
+                                 <span class="text-muted small">Yesterday</span>
+                              </div>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="p-2 text-right">
+                     <ul class="list-inline small">
+                        <li class="list-inline-item"><a href="#">Mark All Read</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </li>
+            <!-- end::header notification dropdown -->
+            <!-- begin::user menu -->
+            <li class="nav-item dropdown">
+               <a href="#" class="nav-link" title="Configuración" data-toggle="dropdown"><i
+                     data-feather="settings"></i></a>
+               <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                  <div class="p-4 text-center d-flex justify-content-between"
+                     data-backround-image="{{URL::asset('/image/avatar/image1.jpg')}}">
+                     <h6 class="mb-0">Configuración</h6>
+                  </div>
+                  <div>
+                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                           <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input"
+                                 id="customSwitch1" checked><label class="custom-control-label config-title"
+                                 for="customSwitch1">Mostrar título de cabecera.</label></div>
+                        </li>
+                        <li class="list-group-item">
+                           <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input"
+                                 id="customSwitch2" checked><label class="custom-control-label config-date"
+                                 for="customSwitch2">Mostrar fecha en cabecera</label></div>
+                        </li>
+                        <li class="list-group-item">
+                           <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input"
+                                 id="customSwitch3" checked><label class="custom-control-label config-icons"
+                                 for="customSwitch3">Mostrar iconos de cabecera</label></div>
+                        </li>
+                        <li class="list-group-item">
+                           <div class="custom-control custom-switch"><input type="checkbox" class="custom-control-input"
+                                 id="customSwitch4"><label class="custom-control-label config-text"
+                                 for="customSwitch4">Mostrar letra más grande</label></div>
+                        </li>
+                        <li class="list-group-item">
+                           <span class="text-muted small">Los cambios se borrarán al cerrar sesión</span>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </li>
+            <!-- end::user menu -->
+         </ul>
+         <!-- begin::mobile header toggler -->
+         <ul class="navbar-nav d-flex align-items-center">
+            <li class="nav-item header-toggler"><a href="#" class="nav-link"><i data-feather="arrow-down"></i></a></li>
+         </ul>
+         <!-- end::mobile header toggler -->
+      </div>
+   </div>
+   <!-- end::header -->
+   <div id="main">
+      <!-- begin::navigation -->
+      <div class="navigation">
+         <div class="navigation-menu-tab bg-{{$bg->customcolor}}">
+            <div>
+               <div class="navigation-menu-tab-header" data-toggle="tooltip" title="{{Auth::user()->username}}"
+                  data-placement="right">
+                  {{-- <figure class="avatar avatar-sm"><img src="{{URL::asset('/image/logos/ssm_logo_60.png')}}"
+                        class="rounded-circle" alt="avatar"></figure> --}}
+                  <figure class="avatar avatar-sm">
+                     <span
+                        class="avatar-title bg-white text-{{$bg->customcolor}} rounded-circle">{{substr(Auth::user()->username,0,1)}}</span>
+                  </figure>
+               </div>
             </div>
-            <!-- end::navigation menu -->
+            <div class="flex-grow-1">
+               <ul>
+                  <li><a class="active" href="#" data-toggle="tooltip" data-placement="right" title="Proyectos"
+                        data-nav-target="#dashboards"><i data-feather="home"></i></a></li>
+                  <li><a href="#" data-toggle="tooltip" data-placement="right" title="Apps" data-nav-target="#apps"><i
+                           data-feather="command"></i></a></li>
+                  <li><a href="#" data-toggle="tooltip" data-placement="right" title="UI Elements"
+                        data-nav-target="#elements"><i data-feather="layers"></i></a></li>
+                  <li><a href="#" data-toggle="tooltip" data-placement="right" title="Aplicativos"
+                        data-nav-target="#páginas"><i data-feather="copy"></i></a></li>
+               </ul>
+            </div>
+            <div>
+               <ul>
+                  <li><a href="{{ url('usuarios/perfil') }}" data-toggle="tooltip" data-placement="right"
+                        title="Mi perfil"><i data-feather="user"></i></a></li>
+                  <li><a href="{{ route('logout') }}" data-toggle="tooltip" data-placement="right" title="Cerrar sesión"
+                        onclick="event.preventDefault(); localStorage.clear(); document.getElementById('logout-form').submit();"><i
+                           data-feather="log-out"></i></a>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                     </form>
+                  </li>
+               </ul>
+            </div>
          </div>
-         <!-- end::navigation --><!-- begin::main content -->
-         <main class="main-content pb-1">
-            <div class="page-header">
-               <div class="container-fluid d-sm-flex justify-content-between">
-                  <h5>Sistema de gestión de proyectos internos</h5>
-                  <nav aria-label="breadcrumb">
-                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item today-header text-muted">{{ $today }}</li>
-                        {{--  <li class="breadcrumb-item active" aria-current="page"></li>  --}}
-                     </ol>
-                  </nav>
+         <!-- begin::navigation menu -->
+         <div class="navigation-menu-body">
+            <!-- begin::navigation-logo -->
+            <div>
+               <div id="navigation-logo"><a href="https://www.ssm.gob.mx" target="_blank">
+                     <img class="logo" src="{{URL::asset('/image/logos/ssm_logo.png')}}" alt="logo" width="170">
+                     <img class="logo-light" src="{{URL::asset('/image/logos/ssm_logo_white.png')}}" alt="logo-w"
+                        width="170"></a>
                </div>
             </div>
-            <div class="container-fluid">
-               @yield('content')
+            <!-- end::navigation-logo -->
+            <div class="navigation-menu-group">
+               <div class="open" id="dashboards">
+                  <ul>
+                     <li class="navigation-divider mt-2">
+                        <h5 class="text-{{$bg->customcolor}}">SGPI</h5>
+                     </li>
+                     <!-- <li><a href="dashboard-two.html">Ecommerce <span class="badge badge-danger">2</span></a></li> -->
+                     <li><a class="{{ (request()->is('home')) ? 'active' : '' }}" href="{{route('home')}}">Mis
+                           proyectos</a></li>
+                     <li><a class="{{ (request()->is('tareas')) ? 'active' : '' }}"
+                           href="{{route('tareas.index')}}">Tareas</a></li>
+                     <li><a class="{{ (request()->is('subtareas')) ? 'active' : '' }}"
+                           href="{{route('subtareas.index')}}">Subtareas</a></li>
+                     <li><a class="{{ (request()->is('archivos')) ? 'active' : '' }}"
+                           href="{{route('archivos.index')}}">Documentos</a></li>
+                     <div id="pages">
+                        <ul class="mt-3">
+                           @env('usuarios.index')
+                           <li class="navigation-divider mb-0">Desarrollo</li>
+                           <li>
+                              <a class="{{ (request()->is('usuarios')) ? 'active' : '' }} {{ (request()->is('admins')) ? 'active' : '' }}"
+                                 href="#">Usuarios</a>
+                              <ul>
+                                 <li><a class="{{ (request()->is('usuarios')) ? 'text-bold' : '' }}"
+                                       href="{{ route('usuarios.index') }}">Usuarios</a></li>
+                                 <li><a class="{{ (request()->is('admins')) ? 'text-bold' : '' }}"
+                                       href="{{ route('admins.index') }}">Administradores</a></li>
+                              </ul>
+                           </li>
+                           @endenv
+                           @env('direcciones.index')
+                           <li>
+                              <a class="{{ (request()->is('direcciones')) ? 'active' : '' }} {{ (request()->is('subdirecciones')) ? 'active' : '' }} {{ (request()->is('departamentos')) ? 'active' : '' }}"
+                                 href="#">Sectores</a>
+                              <ul>
+                                 <li><a class="{{ (request()->is('direcciones')) ? 'text-bold' : '' }}"
+                                       href="{{ route('direcciones.index') }}">Direcciones</a></li>
+                                 <li><a class="{{ (request()->is('subdirecciones')) ? 'text-bold' : '' }}"
+                                       href="{{ route('subdirecciones.index') }}">Subdirecciones</a></li>
+                                 <li><a class="{{ (request()->is('departamentos')) ? 'text-bold' : '' }}"
+                                       href="{{ route('departamentos.index') }}">Departamentos</a></li>
+                              </ul>
+                           </li>
+                           @endenv
+                           <li>
+                              <a class="{{ (request()->is('documentos')) ? 'active' : '' }} {{ (request()->is('accesos')) ? 'active' : '' }}"
+                                 href="#">Catálogos</a>
+                              <ul>
+                                 <li><a class="{{ (request()->is('accesos')) ? 'text-bold' : '' }}"
+                                       href="{{ route('accesos.index') }}">Permisos</a></li>
+                                 <li><a class="{{ (request()->is('documentos')) ? 'text-bold' : '' }}"
+                                       href="{{ route('documentos.index') }}">Documentos</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a href="#">Menu Level</a>
+                              <ul>
+                                 <li>
+                                    <a href="#">Menu Level</a>
+                                    <ul>
+                                       <li><a href="#">Menu Level</a></li>
+                                    </ul>
+                                 </li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </div>
+                  </ul>
+               </div>
+               <div id="apps">
+
+               </div>
+               <div id="elements">
+
+               </div>
+               <div id="pages">
+
+               </div>
             </div>
-            <!-- begin::footer -->
-            <footer>
-               <div class="container-fluid">
-                  <div><a href="https://www.ssm.gob.mx">© Servicios de Salud de Morelos 2022</a></div>
-                     <!-- <div>
+         </div>
+         <!-- end::navigation menu -->
+      </div>
+      <!-- end::navigation -->
+      <!-- begin::main content -->
+      <main class="main-content pb-1">
+         <div class="page-header">
+            <div class="container-fluid d-sm-flex justify-content-between">
+               <h5>Sistema de gestión de proyectos internos</h5>
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item today-header text-muted">{{ $today }}</li>
+                     {{-- <li class="breadcrumb-item active" aria-current="page"></li> --}}
+                  </ol>
+               </nav>
+            </div>
+         </div>
+         <div class="container-fluid">
+            @yield('content')
+         </div>
+         <!-- begin::footer -->
+         <footer>
+            <div class="container-fluid">
+               <div><a href="https://www.ssm.gob.mx">© Servicios de Salud de Morelos 2022</a></div>
+               <!-- <div>
                         <nav class="nav"><a href="" class="nav-link">Licenses</a><a href="#" class="nav-link">Change Log</a><a href="#" class="nav-link">Get Help</a></nav>
                      </div> -->
-                  </div>
-               </footer>
-               <!-- end::footer -->
-            </main>
+            </div>
+         </footer>
+         <!-- end::footer -->
+      </main>
 
-            <!-- end::main content -->
-         </div>
+      <!-- end::main content -->
+   </div>
 
-         <div class="modal fade modalframe" id="modaliframe"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" style="overflow-y: scroll;">
-           <div class="modal-dialog modal-lg" id="dialog">
-            <div class="modal-content">
-             <div class="modal-header bg-{{$bg->customcolor}}">
-              <h5 class="modal-title text-md text-white" id="modaltitulo"></h5>
-              <span id="close" onclick="$('#modaliframe').modal('hide')" class="close text-{{$bg->customcolor}}" data-dismiss="modal" aria-label="Close"> 
-               <span aria-hidden="true" >&times;</span>
-            </span>
-         </div>
-         <div class="embed-responsive embed-responsive-16by9 z-depth-1-half rounded-bottom">
-            <iframe class="embed-responsive-item" id="iframemarca" src=""  frameborder="0" allowfullscreen></iframe>
-         </div>
-           <!-- <div class="modal-footer">
+   <div class="modal fade modalframe" id="modaliframe" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true" role="dialog" style="overflow-y: scroll;">
+      <div class="modal-dialog modal-lg" id="dialog">
+         <div class="modal-content">
+            <div class="modal-header bg-{{$bg->customcolor}}">
+               <h5 class="modal-title text-md text-white" id="modaltitulo"></h5>
+               <span id="close" onclick="$('#modaliframe').modal('hide')" class="close text-{{$bg->customcolor}}"
+                  data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </span>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half rounded-bottom">
+               <iframe class="embed-responsive-item" id="iframemarca" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <!-- <div class="modal-footer">
            </div> -->
-        </div>
-     </div>
+         </div>
+      </div>
    </div>
 
-   <div class="modal fade modalframe" id="modaliframe2" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" style="overflow-y: scroll;">
-     <div class="modal-dialog" id="dialog">
-      <div class="modal-content">
-       <div class="modal-header bg-{{$bg->customcolor}}">
-        <h5 class="modal-title text-md text-white w-100 text-center" id="modaltitulo2"></h5>
-     </div>
-     <div class="rounded-bottom bg-lavender">
-      <iframe class="" style="height: 420px; width: 100%;" id="iframemarca2" src=""  frameborder="0" allowfullscreen></iframe>
-   </div>
-   </div>
-   </div>
+   <div class="modal fade modalframe" id="modaliframe2" data-backdrop="static" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" style="overflow-y: scroll;">
+      <div class="modal-dialog" id="dialog">
+         <div class="modal-content">
+            <div class="modal-header bg-{{$bg->customcolor}}">
+               <h5 class="modal-title text-md text-white w-100 text-center" id="modaltitulo2"></h5>
+            </div>
+            <div class="rounded-bottom bg-lavender">
+               <iframe class="" style="height: 420px; width: 100%;" id="iframemarca2" src="" frameborder="0"
+                  allowfullscreen></iframe>
+            </div>
+         </div>
+      </div>
    </div>
 
    <!-- Plugins -->
@@ -734,7 +840,6 @@
 
    });
    </script>
-   </body>
 
    <script type="text/javascript">
 
@@ -873,5 +978,6 @@
    });
       
    </script>
+</body>
 
-   </html>
+</html>
